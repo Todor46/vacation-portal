@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               Int               @id @default(autoincrement())
+  email            String            @unique
+  name             String
+  password         String
+  role             Role              @default(EMPLOYEE)
+  vacationRequests VacationRequest[] @relation("Requester")
+  approvedRequests VacationRequest[] @relation("Approver")
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+}
+
+model VacationRequest {
+  id          Int           @id @default(autoincrement())
+  startDate   DateTime
+  endDate     DateTime
+  reason      String?
+  status      RequestStatus @default(PENDING)
+  requesterId Int
+  requester   User          @relation("Requester", fields: [requesterId], references: [id])
+  approverId  Int?
+  approver    User?         @relation("Approver", fields: [approverId], references: [id])
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+enum Role {
+  EMPLOYEE
+  MANAGER
+  ADMIN
+}
+
+enum RequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
