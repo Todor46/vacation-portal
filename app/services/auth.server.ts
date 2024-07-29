@@ -4,6 +4,7 @@ import { FormStrategy } from 'remix-auth-form';
 import type { User } from '@prisma/client';
 import { prisma } from '~/utils/db.server';
 import bcrypt from 'bcryptjs';
+import { saltRounds } from '~/config';
 
 export const authenticator = new Authenticator<User>(sessionStorage, {
   throwOnError: true,
@@ -20,6 +21,15 @@ authenticator.use(
 
     if (!user) {
       throw new AuthorizationError('User does not exist');
+    }
+
+    if (!user.password) {
+      const hashedPassword = bcrypt.hashSync(password, saltRounds);
+      await prisma.user.update({
+        where: { id: user.id },
+        data: { password: hashedPassword },
+      });
+      return user as User;
     }
 
     const hashedPassword = user.password;
