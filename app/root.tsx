@@ -8,8 +8,12 @@ import {
 import './globals.css';
 import { authenticator } from './services/auth.server';
 import { LoaderFunctionArgs } from '@remix-run/node';
+import Header from './components/header';
+import { useTypedLoaderData } from 'remix-typedjson';
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const user = useTypedLoaderData<typeof loader>();
+
   return (
     <html lang="en">
       <head>
@@ -22,6 +26,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
+        {user ? <Header user={user} /> : null}
         {children}
         <ScrollRestoration />
         <Scripts />
