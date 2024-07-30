@@ -10,6 +10,7 @@ import { authenticator } from './services/auth.server';
 import { LoaderFunctionArgs } from '@remix-run/node';
 import Header from './components/header';
 import { useTypedLoaderData } from 'remix-typedjson';
+import { Toaster } from './components/ui/toaster';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const user = useTypedLoaderData<typeof loader>();
@@ -28,6 +29,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         {user ? <Header user={user} /> : null}
         {children}
+        <Toaster />
         <ScrollRestoration />
         <Scripts />
       </body>
