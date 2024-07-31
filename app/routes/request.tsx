@@ -16,8 +16,6 @@ type ErrorResponse = {
 
 export type VacationRequestResponse = SuccessResponse | ErrorResponse;
 
-// TODO: Check if any open requests are active for the current user
-// User shouldn't be able to have multiple requests open?
 export async function action({ request }: ActionFunctionArgs) {
   const user = await authenticator.isAuthenticated(request);
 
@@ -28,6 +26,19 @@ export async function action({ request }: ActionFunctionArgs) {
     );
 
   let body: RequestSchemaType;
+
+  const pendingRequest = await prisma.vacationRequest.findFirst({
+    where: {
+      requesterId: user.id,
+      status: 'PENDING',
+    },
+  });
+
+  if (pendingRequest)
+    return json<ErrorResponse>(
+      { success: false, message: 'Already have an open request' },
+      { status: 400 },
+    );
 
   try {
     const rawBody = await request.json();
