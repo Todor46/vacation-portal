@@ -37,7 +37,7 @@ export async function action({ request }: ActionFunctionArgs) {
   if (pendingRequest)
     return json<ErrorResponse>(
       { success: false, message: 'Already have an open request' },
-      { status: 400 },
+      { status: 400, statusText: 'pending-request-exists' },
     );
 
   try {

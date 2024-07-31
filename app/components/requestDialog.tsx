@@ -65,10 +65,10 @@ const RequestDialog = () => {
       setOpen(false);
       form.reset();
     }
-    if (!fetcher?.data?.success) {
+    if (fetcher?.data?.success === false) {
       toast({
         title: 'Request failed',
-        description: 'Something went wrong. Please try again.',
+        description: fetcher?.data?.message,
         variant: 'destructive',
       });
     }
