@@ -119,6 +119,7 @@ const RequestDialog = () => {
                       numberOfMonths={2}
                       onSelect={field.onChange}
                       selected={field.value}
+                      fromDate={new Date()}
                       classNames={{
                         months:
                           'flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0 justify-between',
