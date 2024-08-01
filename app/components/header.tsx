@@ -18,8 +18,18 @@ const Header = ({ user }: { user: User }) => {
     .join('');
 
   return (
-    <header className="flex justify-between container py-4 items-center">
-      <div className="text-3xl font-medium">Vacation Portal</div>
+    <header className="flex justify-between container py-6 items-center">
+      <Link
+        to="/"
+        className="text-4xl font-semibold font-kaushan flex items-center gap-1"
+      >
+        <img
+          src="/vacay.png"
+          alt="vacay"
+          className="h-16"
+        />
+        Vacation Portal
+      </Link>
 
       <div className="space-x-5">
         <RequestDialog />
@@ -32,7 +42,7 @@ const Header = ({ user }: { user: User }) => {
           <DropdownMenuContent>
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem asChild>
               <Link to="/requests">My requests</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>Days available</DropdownMenuItem>

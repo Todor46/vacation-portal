@@ -11,6 +11,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@fontsource/kaushan-script": "^5.0.21",
     "@hookform/resolvers": "^3.9.0",
     "@prisma/client": "^5.17.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",

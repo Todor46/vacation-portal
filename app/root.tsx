@@ -11,6 +11,7 @@ import { LoaderFunctionArgs } from '@remix-run/node';
 import Header from './components/header';
 import { useTypedLoaderData } from 'remix-typedjson';
 import { Toaster } from './components/ui/toaster';
+import '@fontsource/kaushan-script';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const user = useTypedLoaderData<typeof loader>();
