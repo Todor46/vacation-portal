@@ -51,7 +51,7 @@ const columns: ColumnDef<VacationRequest>[] = [
     size: 0,
     cell: ({ row, cell }) => {
       return row.getValue('status') === 'PENDING' ? (
-        <DropdownMenu>
+        <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"
