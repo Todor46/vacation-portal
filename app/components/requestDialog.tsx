@@ -25,12 +25,13 @@ import { useEffect, useState } from 'react';
 import { ReloadIcon } from '@radix-ui/react-icons';
 import { useToast } from './ui/use-toast';
 import { ToastAction } from './ui/toast';
-import { VacationRequestResponse } from '~/routes/request';
+import { Response } from '~/utils/misc.server';
+import { VacationRequest } from '@prisma/client';
 
 const RequestDialog = () => {
   const [open, setOpen] = useState(false);
   const { toast } = useToast();
-  const fetcher = useFetcher<VacationRequestResponse>();
+  const fetcher = useFetcher<Response<VacationRequest>>();
   const form = useForm({
     resolver: zodResolver(requestSchema),
   });
@@ -40,7 +41,7 @@ const RequestDialog = () => {
   const handleSubmit: SubmitHandler<FieldValues> = (values) => {
     fetcher.submit(JSON.stringify(values), {
       method: 'post',
-      action: '/request',
+      action: '/request/create',
       encType: 'application/json',
     });
   };

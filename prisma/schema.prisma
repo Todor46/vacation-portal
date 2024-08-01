@@ -14,7 +14,7 @@ datasource db {
 }
 
 model User {
-  id               Int               @id @default(autoincrement())
+  id               String            @id @default(uuid())
   email            String            @unique
   name             String
   password         String?
@@ -31,9 +31,9 @@ model VacationRequest {
   endDate     DateTime
   reason      String?
   status      RequestStatus @default(PENDING)
-  requesterId Int
+  requesterId String
   requester   User          @relation("Requester", fields: [requesterId], references: [id])
-  approverId  Int?
+  approverId  String?
   approver    User?         @relation("Approver", fields: [approverId], references: [id])
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
@@ -49,4 +49,5 @@ enum RequestStatus {
   PENDING
   APPROVED
   REJECTED
+  CANCELLED
 }

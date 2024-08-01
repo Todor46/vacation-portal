@@ -3,18 +3,7 @@ import { ActionFunctionArgs, json } from '@remix-run/node';
 import { requestSchema, RequestSchemaType } from '~/schemas/requestSchema';
 import { authenticator } from '~/services/auth.server';
 import { prisma } from '~/utils/db.server';
-
-type SuccessResponse = {
-  success: true;
-  data: VacationRequest;
-};
-
-type ErrorResponse = {
-  success: false;
-  message: string;
-};
-
-export type VacationRequestResponse = SuccessResponse | ErrorResponse;
+import { ErrorResponse, SuccessResponse } from '~/utils/misc.server';
 
 export async function action({ request }: ActionFunctionArgs) {
   const user = await authenticator.isAuthenticated(request);
@@ -60,7 +49,7 @@ export async function action({ request }: ActionFunctionArgs) {
         requesterId: user.id,
       },
     });
-    return json<SuccessResponse>({
+    return json<SuccessResponse<VacationRequest>>({
       success: true,
       data: vacation,
     });

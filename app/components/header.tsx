@@ -32,7 +32,9 @@ const Header = ({ user }: { user: User }) => {
           <DropdownMenuContent>
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>My requests</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link to="/requests">My requests</Link>
+            </DropdownMenuItem>
             <DropdownMenuItem>Days available</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
