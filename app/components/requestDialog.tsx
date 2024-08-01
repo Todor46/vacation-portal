@@ -80,7 +80,7 @@ const RequestDialog = () => {
       open={open}
       onOpenChange={setOpen}
     >
-      <DialogTrigger>
+      <DialogTrigger asChild>
         <Button>New Request</Button>
       </DialogTrigger>
       <DialogContent className="max-w-2xl">
