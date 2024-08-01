@@ -37,6 +37,7 @@ model VacationRequest {
   approver    User?         @relation("Approver", fields: [approverId], references: [id])
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
+  comment     String?
 }
 
 enum Role {
