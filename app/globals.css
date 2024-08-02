@@ -39,6 +39,18 @@
     --ring: 214 87% 25%;
 
     --radius: 0.5rem;
+
+    /******** Full calendar overrides ********/
+
+    --fc-button-text-color: #fff;
+    --fc-button-bg-color: hsla(var(--primary));
+    --fc-button-border-color: hsla(var(--primary));
+    --fc-button-hover-bg-color: hsla(var(--primary) / 0.9);
+    --fc-button-hover-border-color: hsla(var(--primary) / 0.9);
+    --fc-button-active-bg-color: hsla(var(--primary) / 0.9);
+    --fc-button-active-border-color: hsla(var(--primary) / 0.9);
+
+    /********************/
   }
   * {
     @apply border-border;
