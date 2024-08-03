@@ -62,7 +62,9 @@ const Header = ({ user }: { user: User }) => {
                 </Link>
               </DropdownMenuItem>
             )}
-            <DropdownMenuItem>Days available</DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link to="/mydays">Days</Link>
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <Link to="/logout">Log out</Link>
