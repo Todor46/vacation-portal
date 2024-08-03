@@ -22,11 +22,11 @@ import { Calendar } from './ui/calendar';
 import { requestSchema } from '~/schemas/requestSchema';
 import { Form, useFetcher, useNavigate } from '@remix-run/react';
 import { useEffect, useState } from 'react';
-import { ReloadIcon } from '@radix-ui/react-icons';
 import { useToast } from './ui/use-toast';
 import { ToastAction } from './ui/toast';
 import { Response } from '~/utils/misc.server';
 import { VacationRequest } from '@prisma/client';
+import SubmitButton from './submitButton';
 
 const RequestDialog = () => {
   const [open, setOpen] = useState(false);
@@ -133,15 +133,9 @@ const RequestDialog = () => {
               <DialogClose asChild>
                 <Button variant={'secondary'}>Cancel</Button>
               </DialogClose>
-              <Button
-                disabled={fetcher.state === 'submitting'}
-                type="submit"
-              >
-                {fetcher.state === 'submitting' ? (
-                  <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-                ) : null}
+              <SubmitButton isSubmitting={fetcher.state === 'submitting'}>
                 Submit
-              </Button>
+              </SubmitButton>
             </div>
           </Form>
         </FormProvider>

@@ -1,4 +1,3 @@
-import { Button } from 'app/components/ui/button';
 import { Input } from 'app/components/ui/input';
 import { Label } from 'app/components/ui/label';
 import { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
@@ -6,6 +5,7 @@ import { Form, json, useActionData } from '@remix-run/react';
 import { AuthorizationError } from 'remix-auth';
 import { z } from 'zod';
 import { authenticator } from '~/services/auth.server';
+import SubmitButton from '~/components/submitButton';
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -24,7 +24,6 @@ type ActionData = {
     };
   };
 };
-
 export default function Login() {
   const actionData = useActionData<ActionData>();
 
@@ -61,7 +60,7 @@ export default function Login() {
         <div className="text-sm text-red-500">
           {actionData?.errors.formErrors?.[0]}
         </div>
-        <Button type="submit">Submit</Button>
+        <SubmitButton>Submit</SubmitButton>
       </Form>
     </div>
   );

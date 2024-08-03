@@ -3,7 +3,7 @@ import { LoaderFunctionArgs } from '@remix-run/node';
 import { Form, json, useActionData } from '@remix-run/react';
 import { useEffect } from 'react';
 import { useTypedLoaderData } from 'remix-typedjson';
-import { Button } from '~/components/ui/button';
+import SubmitButton from '~/components/submitButton';
 import { Calendar } from '~/components/ui/calendar';
 import { Label } from '~/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '~/components/ui/radio-group';
@@ -80,7 +80,7 @@ const Request = () => {
             id="comment"
             name="comment"
           />
-          <Button type="submit">Submit</Button>
+          <SubmitButton>Submit</SubmitButton>
         </Form>
       )}
     </div>
