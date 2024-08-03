@@ -45,11 +45,21 @@ const Header = ({ user }: { user: User }) => {
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <Link to="/requests/my">My requests</Link>
+              <Link
+                to="/requests/my"
+                prefetch="intent"
+              >
+                My requests
+              </Link>
             </DropdownMenuItem>
             {(role === 'ADMIN' || role === 'MANAGER') && (
               <DropdownMenuItem asChild>
-                <Link to="/requests/employee">Employees Requests</Link>
+                <Link
+                  to="/requests/employee"
+                  prefetch="intent"
+                >
+                  Employees Requests
+                </Link>
               </DropdownMenuItem>
             )}
             <DropdownMenuItem>Days available</DropdownMenuItem>
