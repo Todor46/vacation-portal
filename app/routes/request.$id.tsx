@@ -38,10 +38,7 @@ const Request = () => {
   }, [actionData]);
   return (
     <div className="container">
-      <VacationInfo
-        user={user}
-        vacationRequest={vacationRequest}
-      />
+      <VacationInfo vacationRequest={vacationRequest} />
       <Calendar
         mode="range"
         numberOfMonths={2}

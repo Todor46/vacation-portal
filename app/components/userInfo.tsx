@@ -1,15 +1,19 @@
 import { RequestByIdLoaderData } from '~/routes/request.$id';
 import { format, isValid, parseISO } from 'date-fns';
 
-const VacationInfo = ({ user, vacationRequest }: RequestByIdLoaderData) => {
+const VacationInfo = ({
+  vacationRequest,
+}: {
+  vacationRequest: RequestByIdLoaderData['vacationRequest'];
+}) => {
   const fields = [
     {
       label: 'Name',
-      value: user.name,
+      value: vacationRequest.requester.name,
     },
     {
       label: 'Email',
-      value: user.email,
+      value: vacationRequest.requester.email,
     },
     {
       label: 'Start Date',
