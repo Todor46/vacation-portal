@@ -1,23 +1,25 @@
 import { User, VacationRequest } from '@prisma/client';
 import { LoaderFunctionArgs } from '@remix-run/node';
-import { Form, json, useActionData, useLoaderData } from '@remix-run/react';
+import { Form, json, useActionData } from '@remix-run/react';
 import { useEffect } from 'react';
+import { useTypedLoaderData } from 'remix-typedjson';
 import { Button } from '~/components/ui/button';
 import { Calendar } from '~/components/ui/calendar';
 import { Label } from '~/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '~/components/ui/radio-group';
 import { Textarea } from '~/components/ui/textarea';
 import { toast } from '~/components/ui/use-toast';
+import VacationInfo from '~/components/userInfo';
 import { authenticator } from '~/services/auth.server';
 import { prisma } from '~/utils/db.server';
 
-type LoaderData = {
-  vacationRequest: VacationRequest & { requester: User };
+export type RequestByIdLoaderData = {
+  vacationRequest: VacationRequest & { requester: User; approver: User | null };
   user: User;
 };
 
 const Request = () => {
-  const { vacationRequest, user } = useLoaderData<LoaderData>();
+  const { vacationRequest, user } = useTypedLoaderData<RequestByIdLoaderData>();
   const actionData = useActionData<typeof action>();
 
   useEffect(() => {
@@ -36,7 +38,10 @@ const Request = () => {
   }, [actionData]);
   return (
     <div className="container">
-      {JSON.stringify(vacationRequest?.requester, null, 2)}
+      <VacationInfo
+        user={user}
+        vacationRequest={vacationRequest}
+      />
       <Calendar
         mode="range"
         numberOfMonths={2}
@@ -101,12 +106,13 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
     },
     include: {
       requester: true,
+      approver: true,
     },
   });
   if (!vacationRequest) {
     throw new Response('Not Found', { status: 404 });
   }
-  return json<LoaderData>({ vacationRequest, user });
+  return json<RequestByIdLoaderData>({ vacationRequest, user });
 }
 
 export async function action({ request, params }: LoaderFunctionArgs) {
