@@ -66,7 +66,7 @@ const Requests = () => {
 export default Requests;
 
 export async function loader() {
-  const vacationRequests = await prisma.vacationRequest.findMany({
+  return await prisma.vacationRequest.findMany({
     where: {
       requester: {
         role: 'EMPLOYEE',
@@ -80,5 +80,4 @@ export async function loader() {
       },
     },
   });
-  return vacationRequests;
 }

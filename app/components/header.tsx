@@ -30,7 +30,7 @@ const Header = ({ user }: { user: User }) => {
           src="/vacay.png"
           alt="vacay"
           className="h-16"
-        />
+        />{' '}
         Vacation Portal
       </Link>
 

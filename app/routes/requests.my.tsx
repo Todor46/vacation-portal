@@ -88,10 +88,9 @@ export default Requests;
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const user = await authenticator.isAuthenticated(request);
-  const vacationRequests = await prisma.vacationRequest.findMany({
+  return await prisma.vacationRequest.findMany({
     where: {
       requesterId: user?.id,
     },
   });
-  return vacationRequests;
 }
