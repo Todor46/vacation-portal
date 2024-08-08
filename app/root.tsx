@@ -12,6 +12,7 @@ import Header from './components/header';
 import { useTypedLoaderData } from 'remix-typedjson';
 import { Toaster } from './components/ui/toaster';
 import '@fontsource/kaushan-script';
+import { $path } from 'remix-routes';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const user = useTypedLoaderData<typeof loader>();
@@ -46,6 +47,6 @@ export default function App() {
 export async function loader({ request }: LoaderFunctionArgs) {
   if (request.url.includes('/login')) return null;
   return await authenticator.isAuthenticated(request, {
-    failureRedirect: '/login',
+    failureRedirect: $path('/login'),
   });
 }

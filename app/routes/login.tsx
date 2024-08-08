@@ -6,6 +6,7 @@ import { AuthorizationError } from 'remix-auth';
 import { z } from 'zod';
 import { authenticator } from '~/services/auth.server';
 import SubmitButton from '~/components/submitButton';
+import { $path } from 'remix-routes';
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -82,7 +83,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
 
   try {
     return await authenticator.authenticate('form', clonedRequest, {
-      successRedirect: '/',
+      successRedirect: $path('/'),
       context,
     });
   } catch (error) {
@@ -111,6 +112,6 @@ export async function action({ request, context }: ActionFunctionArgs) {
 
 export async function loader({ request }: LoaderFunctionArgs) {
   return await authenticator.isAuthenticated(request, {
-    successRedirect: '/',
+    successRedirect: $path('/'),
   });
 }

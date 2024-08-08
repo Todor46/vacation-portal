@@ -10,6 +10,7 @@ import {
 } from './ui/dropdown-menu';
 import { User } from '@prisma/client';
 import RequestDialog from './requestDialog';
+import { $path } from 'remix-routes';
 
 const Header = ({ user }: { user: User }) => {
   const initials = user?.name
@@ -46,7 +47,7 @@ const Header = ({ user }: { user: User }) => {
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
               <Link
-                to="/requests/my"
+                to={$path('/requests/my')}
                 prefetch="intent"
               >
                 My requests
@@ -55,7 +56,7 @@ const Header = ({ user }: { user: User }) => {
             {(role === 'ADMIN' || role === 'MANAGER') && (
               <DropdownMenuItem asChild>
                 <Link
-                  to="/requests/employee"
+                  to={$path('/requests/employee')}
                   prefetch="intent"
                 >
                   Employees Requests
@@ -63,11 +64,11 @@ const Header = ({ user }: { user: User }) => {
               </DropdownMenuItem>
             )}
             <DropdownMenuItem asChild>
-              <Link to="/mydays">Days</Link>
+              <Link to={$path('/mydays')}>Days</Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <Link to="/logout">Log out</Link>
+              <Link to={$path('/logout')}>Log out</Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
